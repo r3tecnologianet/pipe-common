@@ -4,7 +4,6 @@ inputs:
   oci_auth_token:
     description: 'The OCI Auth Token to use for login.'
     required: true
-    secret: true
   oci_tenancy_name:
     description: 'The OCI Tenancy Name.'
     required: true
