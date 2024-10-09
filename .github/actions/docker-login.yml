@@ -1,0 +1,24 @@
+name: "Log in to Oracle Cloud Registry"
+description: 'Log in to Oracle Cloud Registry using Docker.'
+inputs:
+  oci_auth_token:
+    description: 'The OCI Auth Token to use for login.'
+    required: true
+    secret: true
+  oci_tenancy_name:
+    description: 'The OCI Tenancy Name.'
+    required: true
+  oci_username:
+    description: 'The OCI Username.'
+    required: true
+  registry_url:
+    description: 'The URL of the OCI Docker registry (default: https://gru.ocir.io).'
+    required: false
+    default: 'https://gru.ocir.io'
+runs:
+  using: 'composite'
+  steps:
+    - name: Log in to Oracle Cloud Registry
+      run: |
+        echo "${{ inputs.oci_auth_token }}" | sudo docker login ${{ inputs.registry_url }} -u "${{ inputs.oci_tenancy_name }}/${{ inputs.oci_username }}" --password-stdin
+      shell: bash
